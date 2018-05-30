@@ -2,7 +2,7 @@
 ### A serverless remote torrenting utility
 
 ### Overview
-Sendit allows users to torrent files using their magnet link on the cloud without using servers. It does this by using continuous integration platforms (circlieci in this case) to download files on the cloud. It then uploads the torrented file to Mozilla Firefox Send, and provides a link to download it from Send as a GitHub status check.
+Sendit allows users to torrent files using their magnet link on the cloud without using servers. It does this by using continuous integration platforms (CircleCi in this case) to download files on the cloud. It then uploads the torrented file to Mozilla Firefox Send, and provides a link to download it from Send as a GitHub status check.
 
 By using Mozilla Firefox Send, all the files are encrypted, and automatically delete after 24 hours or after the first download, which ever comes first.
 
