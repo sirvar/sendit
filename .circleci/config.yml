@@ -51,5 +51,5 @@ jobs:
       - run:
           name: send file
           command: |
-            ./sendit.sh downloaded.zip | tail -n 1 | xargs -I {} curl -k -d "{\"state\":\"success\",\"target_url\":\"{}\",\"context\":\"sendit\"}" -X POST "https://api.github.com/repos/dev-sirvar/sendit/commits/${CIRCLE_SHA1}/statuses?access_token=${GITHUB_TOKEN}"
+            ./sendit.sh downloaded.zip | xargs -I {} curl -k -d "{\"state\":\"success\",\"target_url\":\"{}\",\"context\":\"sendit\"}" -X POST "https://api.github.com/repos/dev-sirvar/sendit/commits/${CIRCLE_SHA1}/statuses?access_token=${GITHUB_TOKEN}"
             
