@@ -1,1 +1,1 @@
-send-cli $1 >> out.temp && sed -n -e 5p out.temp && rm out.temp
+send-cli $1 | grep "https"
