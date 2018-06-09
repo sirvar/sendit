@@ -41,7 +41,7 @@ jobs:
       - run:
           name: download with aria2
           command: |
-            aria2c -d temp --seed-time=2 --seed-ratio=0.1 'MAGNET_LINK'
+            aria2c -d temp --seed-time=2 --seed-ratio=0.1 'magnet:?xt=urn:btih:26987e9b3c2733f0d926de609e32dbde022c1250&dn=Undertale+%28GOG%29&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969&tr=udp%3A%2F%2Fzer0day.ch%3A1337&tr=udp%3A%2F%2Fopen.demonii.com%3A1337&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&tr=udp%3A%2F%2Fexodus.desync.com%3A6969'
 
       - run:
           name: zip file
