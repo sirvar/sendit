@@ -36,20 +36,20 @@ jobs:
       - run:
           name: make temp dir
           command: |
-            mkdir temp
+            mkdir ${CIRCLE_BRANCH}
 
       - run:
           name: download with aria2
           command: |
-            aria2c -d temp --seed-time=2 --seed-ratio=0.1 'MAGNET_LINK'
+            aria2c -d ${CIRCLE_BRANCH} --seed-time=2 --seed-ratio=0.1 'MAGNET_LINK'
 
       - run:
           name: zip file
           command: |
-            zip -r downloaded.zip temp
+            zip -r ${CIRCLE_BRANCH}.zip ${CIRCLE_BRANCH}
             
       - run:
           name: send file
           command: |
-            ./sendit.sh downloaded.zip | xargs -I {} curl -k -d "{\"state\":\"success\",\"target_url\":\"{}\",\"context\":\"sendit\"}" -X POST "https://api.github.com/repos/dev-sirvar/sendit/commits/${CIRCLE_SHA1}/statuses?access_token=${GITHUB_TOKEN}"
+            ./sendit.sh ${CIRCLE_BRANCH}.zip | xargs -I {} curl -k -d "{\"state\":\"success\",\"target_url\":\"{}\",\"context\":\"sendit\"}" -X POST "https://api.github.com/repos/dev-sirvar/sendit/commits/${CIRCLE_SHA1}/statuses?access_token=${GITHUB_TOKEN}"
             
