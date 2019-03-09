@@ -7,9 +7,9 @@ Sendit allows users to torrent files using their magnet link on the cloud withou
 By using Mozilla Firefox Send, all the files are encrypted, and automatically delete after 24 hours or after the first download, which ever comes first.
 
 ### Usage
-Once CircleCi is setup and the GitHub access token has been setup, simply open a PR and add in the magnet link for the torrent. Specifically, this line in the `config.yml`
+Once CircleCI is setup and the GitHub access token has been setup, simply open a PR and add in the magnet link for the torrent. Specifically, this line in the `config.yml`
 ```bash
-$ aria2c -d download --enable-dht6 false --seed-time=0 'MAGNET_LINK'
+$ webtorrent download "MAGNET_LINK"
 ```
 Once you commit the change to the PR with the proper magnet link, if everything was setup correctly, the PR will have a status check with a link to download the file once the download is complete and successful.
 
