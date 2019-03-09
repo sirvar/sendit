@@ -6,7 +6,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/python:3.6.1
+      - image: circleci/node:10.15.0
 
     working_directory: ~/repo
 
@@ -14,14 +14,19 @@ jobs:
       - checkout
 
       - run:
+          name: install python
+          command: |
+            sudo apt-get -y install python3-pip
+
+      - run:
           name: install send
           command: |
             sudo pip3 install sendclient
 
       - run:
-          name: install aria2
+          name: install webtorrent-cli
           command: |
-            sudo apt-get install aria2
+            sudo npm i -g webtorrent-cli
             
       - run:
           name: install zip
@@ -32,24 +37,18 @@ jobs:
           name: chmod x send file
           command: |
             chmod +x ./sendit.sh
-            
-      - run:
-          name: make temp dir
-          command: |
-            mkdir temp
 
       - run:
-          name: download with aria2
+          name: download with webtorrent
           command: |
-            aria2c -d temp --seed-time=2 --seed-ratio=0.1 'MAGNET_LINK'
+            webtorrent download "MAGNET_LINK"
 
       - run:
           name: zip file
           command: |
-            zip -r downloaded.zip temp
+            zip -r $\{CIRCLE_BRANCH}.zip ./*
             
       - run:
           name: send file
           command: |
-            ./sendit.sh downloaded.zip | xargs -I {} curl -k -d "{\"state\":\"success\",\"target_url\":\"{}\",\"context\":\"sendit\"}" -X POST "https://api.github.com/repos/sirvar/sendit/commits/${CIRCLE_SHA1}/statuses?access_token=${GITHUB_TOKEN}"
-            
+            ./sendit.sh $\{CIRCLE_BRANCH}.zip | xargs -I {} curl -k -d '{\"state\":\"success\",\"target_url\":\"{}\",\"context\":\"sendit\"}' -X POST "https://api.github.com/repos/dev-sirvar/sendit/commits/$\{CIRCLE_SHA1}/statuses?access_token=$\{GITHUB_TOKEN}"
