@@ -1,6 +1,8 @@
 # sendit ✈️
 ### A serverless remote torrenting utility
 
+> This project is no longer maintained
+
 ### Overview
 Sendit allows users to torrent files using their magnet link on the cloud without using servers. It does this by using continuous integration platforms (CircleCI in this case) to download files on the cloud. It then uploads the torrented file to Mozilla Firefox Send, and provides a link to download it from Send as a GitHub status check.
 
